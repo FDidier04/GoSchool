@@ -60,6 +60,8 @@ export interface Course {
   enrolledStudents: number;
   instructor: string;
   status: 'active' | 'inactive';
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 // Booking types

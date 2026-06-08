@@ -31,3 +31,4 @@ Thumbs.db
 # Local caches
 .turbo/
 .cache/
+*.tsbuildinfo

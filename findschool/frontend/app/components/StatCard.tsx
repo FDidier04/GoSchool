@@ -6,7 +6,7 @@ interface StatCardProps {
   title: string;
   value: string | number;
   icon: string;
-  color?: 'primary' | 'success' | 'warning' | 'danger';
+  color?: 'primary' | 'success' | 'warning' | 'danger' | 'info';
   trend?: number; // Percentage change
 }
 
@@ -16,6 +16,7 @@ export function StatCard({ title, value, icon, color = 'primary', trend }: StatC
     success: 'text-green-600 bg-green-50 border-green-200',
     warning: 'text-yellow-600 bg-yellow-50 border-yellow-200',
     danger: 'text-red-600 bg-red-50 border-red-200',
+    info: 'text-sky-600 bg-sky-50 border-sky-200',
   };
 
   return (

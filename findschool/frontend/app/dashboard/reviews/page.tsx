@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { StatCard } from '../components/StatCard';
+import { StatCard } from '../../components/StatCard';
 
 export default function ReviewsDashboard() {
   const [reviews] = useState([

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { StatCard } from '../components/StatCard';
+import { StatCard } from '../../components/StatCard';
 
 export default function BookingsDashboard() {
   const [bookings] = useState([
