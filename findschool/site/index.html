@@ -935,9 +935,9 @@
       <section class="account-modal" id="creer-compte" aria-label="Creation de compte GoSchool">
         <article class="modal-card">
           <a class="modal-close" href="#" aria-label="Fermer">×</a>
-          <h2 class="modal-title">Cree ton compte GoSchool !</h2>
+          <h2 class="modal-title">Cree ton compte et retrouve ta recherche !</h2>
           <p class="required-note">Les champs marques d'un <strong>*</strong> sont obligatoires</p>
-          <form class="auth-form" action="#creer-compte">
+          <form class="auth-form" action="#profil">
             <label>
               Nom complet <span class="required">*</span>
               <input type="text" name="fullName" placeholder="Ton nom complet" required />
@@ -952,6 +952,10 @@
             <label>
               Mot de passe <span class="required">*</span>
               <input type="password" name="password" placeholder="8 caracteres minimum" required />
+            </label>
+            <label>
+              Confirmer le mot de passe <span class="required">*</span>
+              <input type="password" name="confirmPassword" placeholder="Repete ton mot de passe" required />
             </label>
             <button class="purple-button" type="submit">Creer mon compte →</button>
           </form>

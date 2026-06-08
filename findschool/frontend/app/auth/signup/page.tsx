@@ -18,10 +18,9 @@ export default function SignupPage() {
     password: '',
     confirmPassword: '',
     fullName: '',
-    role: 'student',
   });
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
       [event.target.name]: event.target.value,
@@ -49,7 +48,7 @@ export default function SignupPage() {
         email: formData.phone,
         password: formData.password,
         fullName: formData.fullName,
-        role: formData.role,
+        role: 'student',
       });
 
       if (response.success) {
@@ -59,12 +58,12 @@ export default function SignupPage() {
           id: '1',
           email: formData.phone,
           fullName: formData.fullName,
-          role: formData.role as 'student' | 'teacher' | 'professional' | 'school_admin',
+          role: 'student',
           createdAt: new Date(),
           updatedAt: new Date(),
         });
 
-        router.push('/dashboard');
+        router.push('/onboarding');
       } else {
         setError(response.error || 'Creation du compte impossible');
       }
@@ -87,7 +86,7 @@ export default function SignupPage() {
         </Link>
 
         <h1 className="max-w-2xl text-4xl font-black leading-tight tracking-normal text-black sm:text-5xl">
-          Cree ton compte GoSchool !
+          Cree ton compte et retrouve ta recherche !
         </h1>
         <p className="mt-10 text-right text-lg text-slate-500">
           Les champs marques d&apos;un <span className="text-red-500">*</span> sont obligatoires
@@ -133,23 +132,6 @@ export default function SignupPage() {
                 placeholder="06..."
               />
             </div>
-          </div>
-
-          <div>
-            <label className="mb-3 block text-xl font-black text-black">
-              Profil <span className="text-red-500">*</span>
-            </label>
-            <select
-              name="role"
-              value={formData.role}
-              onChange={handleChange}
-              className="min-h-16 w-full rounded-3xl border border-violet-200 bg-white px-6 text-xl outline-none focus:border-violet-400 focus:ring-4 focus:ring-violet-100"
-            >
-              <option value="student">Eleve / Etudiant</option>
-              <option value="teacher">Professeur</option>
-              <option value="professional">Professionnel</option>
-              <option value="school_admin">Etablissement</option>
-            </select>
           </div>
 
           <div>
