@@ -45,7 +45,7 @@ export default function LoginPage() {
           updatedAt: new Date(),
         });
 
-        router.push('/dashboard');
+        router.push('/onboarding');
       } else {
         setError(response.error || 'Connexion impossible');
       }
