@@ -116,10 +116,11 @@ export default function HomePage() {
             <p className="font-bold text-blue-700">Acces rapide</p>
             <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
               {[
-                ['Ecoles', '/schools'],
-                ['Formations', '/courses'],
-                ['Orientation', '/onboarding'],
+                ['Ecoles', '/ecoles'],
+                ['Formations', '/formations'],
+                ['Orientation', '/orientation'],
                 ['Mon compte', '/auth/login'],
+                ['Contact', '/contact'],
               ].map(([label, href]) => (
                 <Link
                   key={href}
