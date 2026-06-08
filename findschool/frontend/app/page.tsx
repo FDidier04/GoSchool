@@ -112,6 +112,27 @@ export default function HomePage() {
 
       <section className="bg-slate-50 py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-10 rounded-lg border border-blue-200 bg-white p-5 shadow-sm">
+            <p className="font-bold text-blue-700">Acces rapide</p>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                ['Ecoles', '/schools'],
+                ['Formations', '/courses'],
+                ['Orientation', '/onboarding'],
+                ['Mon compte', '/auth/login'],
+              ].map(([label, href]) => (
+                <Link
+                  key={href}
+                  href={href}
+                  className="inline-flex min-h-12 items-center justify-between rounded-md border border-slate-200 bg-slate-50 px-4 font-black text-slate-800 hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700"
+                >
+                  {label}
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              ))}
+            </div>
+          </div>
+
           <div className="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
             <div>
               <p className="font-bold text-blue-700">Explorer par categorie</p>

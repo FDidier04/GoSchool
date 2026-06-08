@@ -2,51 +2,35 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { BookOpen, GraduationCap, Menu, Search, UserCircle, X } from 'lucide-react';
-import { useState } from 'react';
+import { GraduationCap, Search, UserCircle } from 'lucide-react';
 
 const links = [
+  { href: '/', label: 'Accueil' },
   { href: '/schools', label: 'Ecoles' },
   { href: '/courses', label: 'Formations' },
   { href: '/about', label: 'A propos' },
+  { href: '/onboarding', label: 'Orientation' },
 ];
 
 export function Navigation() {
   const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(false);
 
-  const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
+  const isActive = (href: string) =>
+    href === '/' ? pathname === href : pathname === href || pathname.startsWith(`${href}/`);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur">
-      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center gap-2 font-bold text-slate-950">
-          <span className="flex h-9 w-9 items-center justify-center rounded-md bg-blue-700 text-white">
-            <GraduationCap className="h-5 w-5" />
-          </span>
-          <span className="text-xl">GoSchool</span>
-        </Link>
-
-        <div className="hidden items-center gap-1 md:flex">
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`rounded-md px-3 py-2 text-sm font-semibold transition ${
-                isActive(link.href)
-                  ? 'bg-blue-50 text-blue-700'
-                  : 'text-slate-700 hover:bg-slate-50 hover:text-slate-950'
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </div>
-
-        <div className="hidden items-center gap-2 md:flex">
+    <header className="sticky top-0 z-50 border-b border-slate-200 bg-white shadow-sm">
+      <nav className="mx-auto grid max-w-7xl gap-3 px-4 py-3 sm:px-6 lg:grid-cols-[auto_1fr_auto] lg:items-center lg:px-8">
+        <div className="flex items-center justify-between gap-4">
+          <Link href="/" className="flex items-center gap-2 font-bold text-slate-950">
+            <span className="flex h-10 w-10 items-center justify-center rounded-md bg-blue-700 text-white">
+              <GraduationCap className="h-6 w-6" />
+            </span>
+            <span className="text-2xl">GoSchool</span>
+          </Link>
           <Link
             href="/auth/login"
-            className="inline-flex h-10 items-center justify-center gap-2 rounded-md border border-slate-300 px-4 text-sm font-semibold text-slate-700 hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"
+            className="inline-flex h-10 items-center justify-center gap-2 rounded-md border border-slate-300 px-3 text-sm font-bold text-slate-700 hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700 lg:hidden"
             title="Mon compte"
           >
             <UserCircle className="h-4 w-4" />
@@ -54,58 +38,40 @@ export function Navigation() {
           </Link>
         </div>
 
-        <button
-          type="button"
-          onClick={() => setIsOpen((value) => !value)}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-md text-slate-700 hover:bg-slate-100 md:hidden"
-          aria-label={isOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
-        >
-          {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
-      </nav>
-
-      {isOpen && (
-        <div className="border-t border-slate-200 bg-white px-4 py-3 md:hidden">
-          <div className="grid gap-1">
-            {links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className={`rounded-md px-3 py-3 font-semibold ${
-                  isActive(link.href) ? 'bg-blue-50 text-blue-700' : 'text-slate-700'
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
+        <div className="flex gap-2 overflow-x-auto pb-1 lg:justify-center lg:pb-0">
+          {links.map((link) => (
             <Link
-              href="/schools"
-              onClick={() => setIsOpen(false)}
-              className="mt-2 inline-flex items-center gap-2 rounded-md border border-slate-300 px-3 py-3 font-semibold text-slate-800"
+              key={link.href}
+              href={link.href}
+              className={`whitespace-nowrap rounded-md px-3 py-2 text-sm font-bold transition ${
+                isActive(link.href)
+                  ? 'bg-blue-700 text-white'
+                  : 'bg-slate-50 text-slate-700 hover:bg-blue-50 hover:text-blue-700'
+              }`}
             >
-              <Search className="h-4 w-4" />
-              Rechercher
+              {link.label}
             </Link>
-            <Link
-              href="/auth/login"
-              onClick={() => setIsOpen(false)}
-              className="inline-flex items-center gap-2 rounded-md border border-slate-300 px-3 py-3 font-semibold text-slate-800"
-            >
-              <UserCircle className="h-4 w-4" />
-              Mon compte
-            </Link>
-            <Link
-              href="/courses"
-              onClick={() => setIsOpen(false)}
-              className="inline-flex items-center gap-2 rounded-md border border-slate-300 px-3 py-3 font-semibold text-slate-800"
-            >
-              <BookOpen className="h-4 w-4" />
-              Voir les cours
-            </Link>
-          </div>
+          ))}
         </div>
-      )}
+
+        <div className="hidden items-center justify-end gap-2 lg:flex">
+          <Link
+            href="/schools"
+            className="inline-flex h-10 items-center justify-center gap-2 rounded-md bg-emerald-600 px-4 text-sm font-bold text-white hover:bg-emerald-700"
+          >
+            <Search className="h-4 w-4" />
+            Rechercher
+          </Link>
+          <Link
+            href="/auth/login"
+            className="inline-flex h-10 items-center justify-center gap-2 rounded-md border border-slate-300 px-4 text-sm font-bold text-slate-700 hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"
+            title="Mon compte"
+          >
+            <UserCircle className="h-4 w-4" />
+            Mon compte
+          </Link>
+        </div>
+      </nav>
     </header>
   );
 }
