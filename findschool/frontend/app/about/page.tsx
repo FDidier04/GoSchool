@@ -1,113 +1,76 @@
-﻿import React from 'react';
+import Link from 'next/link';
+import { ArrowRight, CheckCircle2, Compass, ShieldCheck, Users } from 'lucide-react';
+
+const values = [
+  {
+    title: 'Orientation utile',
+    text: 'Nous partons du profil de chaque eleve pour proposer des pistes adaptees.',
+    icon: Compass,
+  },
+  {
+    title: 'Informations comparables',
+    text: 'Ville, niveau, programmes, avis et contacts sont presentes simplement.',
+    icon: CheckCircle2,
+  },
+  {
+    title: 'Confiance et transparence',
+    text: 'Les donnees personnelles servent uniquement a ameliorer l orientation.',
+    icon: ShieldCheck,
+  },
+];
 
 export default function About() {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        {/* Header */}
-        <div className="bg-gradient-to-br from-primary to-secondary text-white rounded-lg p-12 mb-12">
-          <h1 className="text-5xl font-bold mb-4">About GoSchool</h1>
-          <p className="text-xl opacity-90">
-            Connecting students, teachers, and professionals across Africa
+    <main className="min-h-screen bg-white text-slate-950">
+      <section className="border-b border-slate-200 bg-blue-50">
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+          <p className="font-bold text-blue-700">A propos de GoSchool</p>
+          <h1 className="mt-3 max-w-4xl text-4xl font-black leading-tight sm:text-5xl">
+            Rendre l orientation scolaire plus simple, plus lisible et plus accessible.
+          </h1>
+          <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-700">
+            GoSchool aide les eleves, parents et professionnels a comparer les ecoles,
+            formations et parcours en Afrique francophone, avec une experience inspiree des
+            meilleures plateformes d orientation.
           </p>
         </div>
+      </section>
 
-        {/* Mission Section */}
-        <div className="bg-white rounded-lg shadow-md p-8 mb-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Mission</h2>
-          <p className="text-gray-700 text-lg leading-relaxed mb-6">
-            GoSchool is dedicated to revolutionizing education access across Africa. We're building a platform
-            that connects students, teachers, and educational institutions, making quality education more accessible,
-            affordable, and convenient.
-          </p>
-          <p className="text-gray-700 text-lg leading-relaxed">
-            Our vision is to bridge the gap between learners seeking knowledge and educators ready to share their expertise,
-            leveraging technology to create meaningful educational opportunities.
-          </p>
+      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+        <div className="grid gap-5 md:grid-cols-3">
+          {values.map((value) => {
+            const Icon = value.icon;
+            return (
+              <article key={value.title} className="rounded-lg border border-slate-200 p-6">
+                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-md bg-emerald-50 text-emerald-700">
+                  <Icon className="h-6 w-6" />
+                </div>
+                <h2 className="text-2xl font-black">{value.title}</h2>
+                <p className="mt-3 leading-7 text-slate-600">{value.text}</p>
+              </article>
+            );
+          })}
         </div>
+      </section>
 
-        {/* Key Features */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-          <div className="bg-white rounded-lg shadow-md p-8">
-            <div className="text-4xl mb-4">ðŸŒ</div>
-            <h3 className="text-xl font-bold text-gray-900 mb-3">Global Coverage</h3>
-            <p className="text-gray-600">
-              Available across Republic of Congo, Cameroon, and Senegal with expansion plans for more African countries.
+      <section className="bg-slate-950 text-white">
+        <div className="mx-auto flex max-w-7xl flex-col justify-between gap-6 px-4 py-14 sm:px-6 md:flex-row md:items-center lg:px-8">
+          <div>
+            <p className="inline-flex items-center gap-2 font-bold text-emerald-300">
+              <Users className="h-5 w-5" />
+              Pour les familles et les etablissements
             </p>
+            <h2 className="mt-2 text-3xl font-black">GoSchool construit le pont entre les projets et les ecoles.</h2>
           </div>
-
-          <div className="bg-white rounded-lg shadow-md p-8">
-            <div className="text-4xl mb-4">ðŸ”</div>
-            <h3 className="text-xl font-bold text-gray-900 mb-3">Smart Search</h3>
-            <p className="text-gray-600">
-              Find schools and courses near you with our advanced geolocation and filtering capabilities.
-            </p>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-md p-8">
-            <div className="text-4xl mb-4">ðŸ’³</div>
-            <h3 className="text-xl font-bold text-gray-900 mb-3">Secure Payments</h3>
-            <p className="text-gray-600">
-              Flexible payment options including mobile money, card payments, and more.
-            </p>
-          </div>
+          <Link
+            href="/onboarding"
+            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-emerald-600 px-5 font-black text-white hover:bg-emerald-700"
+          >
+            Commencer
+            <ArrowRight className="h-5 w-5" />
+          </Link>
         </div>
-
-        {/* Team Section */}
-        <div className="bg-white rounded-lg shadow-md p-8 mb-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8">Why Choose GoSchool?</h2>
-          <ul className="space-y-4">
-            <li className="flex gap-4">
-              <span className="text-primary text-2xl flex-shrink-0">âœ“</span>
-              <div>
-                <h3 className="font-semibold text-gray-900">Verified Institutions</h3>
-                <p className="text-gray-600">All schools and courses are verified for quality and legitimacy</p>
-              </div>
-            </li>
-            <li className="flex gap-4">
-              <span className="text-primary text-2xl flex-shrink-0">âœ“</span>
-              <div>
-                <h3 className="font-semibold text-gray-900">Real Student Reviews</h3>
-                <p className="text-gray-600">Make informed decisions based on authentic feedback from other students</p>
-              </div>
-            </li>
-            <li className="flex gap-4">
-              <span className="text-primary text-2xl flex-shrink-0">âœ“</span>
-              <div>
-                <h3 className="font-semibold text-gray-900">Transparent Pricing</h3>
-                <p className="text-gray-600">Clear, upfront pricing with no hidden fees</p>
-              </div>
-            </li>
-            <li className="flex gap-4">
-              <span className="text-primary text-2xl flex-shrink-0">âœ“</span>
-              <div>
-                <h3 className="font-semibold text-gray-900">24/7 Support</h3>
-                <p className="text-gray-600">Our dedicated team is here to help whenever you need</p>
-              </div>
-            </li>
-          </ul>
-        </div>
-
-        {/* CTA Section */}
-        <div className="bg-gradient-to-br from-primary to-secondary text-white rounded-lg p-12 text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to Transform Your Education?</h2>
-          <p className="text-xl mb-8 opacity-90">Join thousands of students and educators on GoSchool today</p>
-          <div className="flex gap-4 justify-center">
-            <a
-              href="/auth/signup"
-              className="bg-white text-primary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition"
-            >
-              Get Started
-            </a>
-            <a
-              href="/schools"
-              className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary transition"
-            >
-              Explore Schools
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }

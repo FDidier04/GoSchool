@@ -1,177 +1,77 @@
-'use client';
-
-import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { apiClient } from '@/lib/api';
-import { Course } from '@/types';
-import { LoadingSpinner } from '../components/LoadingSpinner';
+import { ArrowRight, BriefcaseBusiness, GraduationCap, Layers3, School } from 'lucide-react';
+
+const programs = [
+  {
+    title: 'Secondaire general',
+    level: 'College - Lycee',
+    text: 'Series A, C, D et accompagnement vers le bac.',
+    icon: School,
+  },
+  {
+    title: 'Secondaire technique',
+    level: 'Lycee technique',
+    text: 'G2, G3, F1, F2, informatique, gestion et industrie.',
+    icon: Layers3,
+  },
+  {
+    title: 'BTS et formations pro',
+    level: 'Post-bac',
+    text: 'Comptabilite, commerce, digital, secretariat et entrepreneuriat.',
+    icon: BriefcaseBusiness,
+  },
+  {
+    title: 'Cours de soutien',
+    level: 'Tous niveaux',
+    text: 'Preparation examens, langues, methodologie et remise a niveau.',
+    icon: GraduationCap,
+  },
+];
 
 export default function CoursesPage() {
-  const [courses, setCourses] = useState<Course[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [filters, setFilters] = useState({
-    series: '',
-    level: '',
-    sortBy: 'price',
-  });
-
-  useEffect(() => {
-    const loadCourses = async () => {
-      try {
-        // Mock loading courses (will integrate with API)
-        await new Promise((resolve) => setTimeout(resolve, 500));
-        setCourses([
-          {
-            id: '1',
-            schoolId: '1',
-            title: 'Mathématiques Avancées',
-            description: 'Cours complet de mathématiques pour les classes supérieures',
-            series: 'A' as any,
-            level: 'Advanced',
-            duration: 3,
-            price: 50000,
-            startDate: new Date('2026-07-01'),
-            maxStudents: 30,
-            enrolledStudents: 18,
-            instructor: 'Prof. Kamayani',
-            status: 'active',
-            createdAt: new Date(),
-            updatedAt: new Date(),
-          },
-        ]);
-      } catch (error) {
-        console.error('Error loading courses:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadCourses();
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <LoadingSpinner size="large" text="Loading courses..." />
-      </div>
-    );
-  }
-
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <h1 className="text-4xl font-bold text-gray-900 mb-8">Available Courses</h1>
-
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Sidebar Filters */}
-          <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-lg font-bold text-gray-900 mb-4">Filters</h3>
-
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Series
-                  </label>
-                  <select
-                    value={filters.series}
-                    onChange={(e) => setFilters({ ...filters, series: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-                  >
-                    <option value="">All Series</option>
-                    <option value="A">Serie A</option>
-                    <option value="D">Serie D</option>
-                    <option value="C">Serie C</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Level
-                  </label>
-                  <select
-                    value={filters.level}
-                    onChange={(e) => setFilters({ ...filters, level: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-                  >
-                    <option value="">All Levels</option>
-                    <option value="beginner">Beginner</option>
-                    <option value="intermediate">Intermediate</option>
-                    <option value="advanced">Advanced</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Sort By
-                  </label>
-                  <select
-                    value={filters.sortBy}
-                    onChange={(e) => setFilters({ ...filters, sortBy: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-                  >
-                    <option value="price">Price</option>
-                    <option value="date">Start Date</option>
-                    <option value="popularity">Popularity</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Courses List */}
-          <div className="lg:col-span-3">
-            {courses.length === 0 ? (
-              <div className="bg-white rounded-lg shadow-md p-12 text-center">
-                <p className="text-gray-600">No courses found matching your filters.</p>
-              </div>
-            ) : (
-              <div className="space-y-4">
-                {courses.map((course) => (
-                  <div key={course.id} className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition">
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                      {/* Course Info */}
-                      <div className="md:col-span-2">
-                        <h3 className="text-xl font-bold text-gray-900 mb-2">{course.title}</h3>
-                        <p className="text-gray-600 mb-4">{course.description}</p>
-
-                        <div className="flex gap-4 text-sm text-gray-600">
-                          <span>📚 {course.series}</span>
-                          <span>👨‍🏫 {course.instructor}</span>
-                          <span>⏱️ {course.duration} months</span>
-                        </div>
-                      </div>
-
-                      {/* Stats */}
-                      <div className="md:col-span-1">
-                        <div className="space-y-3">
-                          <div>
-                            <p className="text-sm text-gray-600">Price</p>
-                            <p className="text-2xl font-bold text-primary">{course.price.toLocaleString()} FC</p>
-                          </div>
-                          <div>
-                            <p className="text-sm text-gray-600">Students</p>
-                            <p className="text-lg font-semibold">
-                              {course.enrolledStudents}/{course.maxStudents}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Action */}
-                      <div className="md:col-span-1 flex items-end">
-                        <button className="w-full bg-primary text-white py-2 rounded-lg hover:bg-secondary transition font-semibold">
-                          Enroll Now
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+    <main className="min-h-screen bg-white text-slate-950">
+      <section className="bg-slate-950 text-white">
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+          <p className="font-bold text-emerald-300">Formations GoSchool</p>
+          <h1 className="mt-3 max-w-3xl text-4xl font-black leading-tight sm:text-5xl">
+            Explore les parcours qui correspondent a ton niveau.
+          </h1>
+          <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-300">
+            GoSchool t'aide a comprendre les options disponibles, comparer les etablissements
+            et avancer vers une decision claire.
+          </p>
+          <Link
+            href="/onboarding"
+            className="mt-8 inline-flex min-h-12 items-center gap-2 rounded-md bg-emerald-600 px-5 font-black text-white hover:bg-emerald-700"
+          >
+            Demarrer mon orientation
+            <ArrowRight className="h-5 w-5" />
+          </Link>
         </div>
-      </div>
-    </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+        <div className="grid gap-5 md:grid-cols-2">
+          {programs.map((program) => {
+            const Icon = program.icon;
+            return (
+              <article key={program.title} className="rounded-lg border border-slate-200 p-6">
+                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-md bg-blue-50 text-blue-700">
+                  <Icon className="h-6 w-6" />
+                </div>
+                <p className="font-bold text-emerald-700">{program.level}</p>
+                <h2 className="mt-2 text-2xl font-black">{program.title}</h2>
+                <p className="mt-3 leading-7 text-slate-600">{program.text}</p>
+                <Link href="/schools" className="mt-5 inline-flex items-center gap-2 font-black text-blue-700">
+                  Voir les ecoles
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+    </main>
   );
 }
