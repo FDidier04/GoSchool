@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { ArrowLeft, ArrowRight, GraduationCap, X } from 'lucide-react';
 
@@ -8,11 +9,32 @@ const profiles = ['Collegien', 'Lyceen', 'Etudiant', 'Salarie en poste', "En rec
 const classes = ['Terminale', 'Premiere', 'Seconde'];
 
 export default function OnboardingPage() {
+  const router = useRouter();
   const [step, setStep] = useState<'profile' | 'class'>('profile');
   const [profile, setProfile] = useState('');
   const [schoolClass, setSchoolClass] = useState('');
+  const [saving, setSaving] = useState(false);
 
   const canContinue = step === 'profile' ? Boolean(profile) : Boolean(schoolClass);
+
+  const saveOrientation = async () => {
+    if (!canContinue) return;
+
+    setSaving(true);
+
+    await fetch('/api/orientation', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        profile,
+        classLevel: schoolClass,
+      }),
+    });
+
+    router.push(`/schools?profile=${encodeURIComponent(profile)}&class=${encodeURIComponent(schoolClass)}`);
+  };
 
   return (
     <main className="min-h-screen bg-white px-4 py-8 text-[#0b003d]">
@@ -100,15 +122,17 @@ export default function OnboardingPage() {
                 <ArrowLeft className="h-7 w-7" />
                 Precedent
               </button>
-              <Link
-                href={`/schools?profile=${encodeURIComponent(profile)}&class=${encodeURIComponent(schoolClass)}`}
+              <button
+                type="button"
+                onClick={saveOrientation}
+                disabled={!canContinue || saving}
                 className={`inline-flex min-h-[76px] items-center justify-center gap-3 rounded-full px-10 text-2xl font-black ${
                   canContinue ? 'bg-violet-700 text-white' : 'pointer-events-none bg-[#f0edf6] text-[#9690ad]'
                 }`}
               >
-                Suivant
+                {saving ? 'Enregistrement...' : 'Suivant'}
                 <ArrowRight className="h-7 w-7" />
-              </Link>
+              </button>
             </div>
           </>
         )}

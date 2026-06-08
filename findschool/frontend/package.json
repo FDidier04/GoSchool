@@ -2,6 +2,9 @@
   "name": "goschool-frontend",
   "version": "1.0.0",
   "description": "GoSchool - Educational platform with geolocation",
+  "engines": {
+    "node": ">=20.9.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -11,33 +14,33 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "next": "^14.0.0",
-    "typescript": "^5.0.0",
-    "@types/react": "^18.2.0",
-    "@types/node": "^20.0.0",
-    "tailwindcss": "^3.3.0",
-    "postcss": "^8.4.0",
-    "autoprefixer": "^10.4.0",
+    "react": "latest",
+    "react-dom": "latest",
+    "next": "latest",
+    "typescript": "latest",
+    "@types/react": "latest",
+    "@types/node": "latest",
+    "tailwindcss": "latest",
+    "postcss": "latest",
+    "autoprefixer": "latest",
     "mapbox-gl": "^2.15.0",
     "@mapbox/mapbox-gl-geocoder": "^5.0.0",
     "next-intl": "^2.17.0",
-    "axios": "^1.5.0",
-    "zustand": "^4.4.0",
-    "react-hook-form": "^7.47.0",
-    "zod": "^3.22.0",
-    "@hookform/resolvers": "^3.3.0",
-    "clsx": "^2.0.0",
-    "class-variance-authority": "^0.7.0",
-    "lucide-react": "^0.263.0",
-    "date-fns": "^2.30.0",
-    "recharts": "^2.10.0"
+    "axios": "latest",
+    "zustand": "latest",
+    "react-hook-form": "latest",
+    "zod": "latest",
+    "@hookform/resolvers": "latest",
+    "clsx": "latest",
+    "class-variance-authority": "latest",
+    "lucide-react": "latest",
+    "date-fns": "latest",
+    "recharts": "latest"
   },
   "devDependencies": {
     "@types/mapbox-gl": "^2.15.0",
-    "prettier": "^3.0.0",
-    "eslint": "^8.48.0",
-    "eslint-config-next": "^14.0.0"
+    "prettier": "latest",
+    "eslint": "latest",
+    "eslint-config-next": "latest"
   }
 }

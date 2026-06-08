@@ -12,6 +12,7 @@ import {
   Star,
   Users,
 } from 'lucide-react';
+import { goschoolListings } from '@/lib/goschool-data';
 
 const categories = [
   'Bac general',
@@ -24,30 +25,6 @@ const categories = [
   'Sante',
   'Langues',
   'Formation pro',
-];
-
-const schools = [
-  {
-    city: 'Brazzaville',
-    name: 'Lycee Technique du Plateau',
-    type: 'Lycee technique',
-    rating: '4.7',
-    text: 'Series C, D, G2 et preparation aux examens avec encadrement renforce.',
-  },
-  {
-    city: 'Douala',
-    name: 'Institut Horizon Pro',
-    type: 'Institut prive',
-    rating: '4.8',
-    text: 'Formations en gestion, informatique, comptabilite et entrepreneuriat.',
-  },
-  {
-    city: 'Dakar',
-    name: 'Academie Teranga',
-    type: 'Centre de formation',
-    rating: '4.6',
-    text: 'Cours de soutien, langues, orientation et accompagnement personnalise.',
-  },
 ];
 
 const steps = [
@@ -172,8 +149,8 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="grid gap-5 md:grid-cols-3">
-            {schools.map((school) => (
-              <article key={school.name} className="rounded-lg border border-slate-200 bg-white p-6">
+            {goschoolListings.map((school) => (
+              <article key={school.id} className="rounded-lg border border-slate-200 bg-white p-6">
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <p className="text-sm font-semibold text-slate-500">
@@ -186,7 +163,9 @@ export default function HomePage() {
                     {school.rating}
                   </span>
                 </div>
-                <p className="mt-4 leading-7 text-slate-600">{school.text}</p>
+                <p className="mt-4 leading-7 text-slate-600">
+                  {school.programs.slice(0, 4).join(', ')}.
+                </p>
                 <Link href="/schools" className="mt-5 inline-flex items-center gap-2 font-bold text-blue-700">
                   Voir l etablissement
                   <ArrowRight className="h-4 w-4" />
