@@ -1,0 +1,38 @@
+{
+  "index": {
+    "title": "Trouvez Votre École Idéale",
+    "subtitle": "Découvrez et comparez les établissements éducatifs au Congo, Cameroun et Sénégal",
+    "searchPlaceholder": "Rechercher des écoles, cours ou professionnels",
+    "getStarted": "Commencer"
+  },
+  "navigation": {
+    "home": "Accueil",
+    "schools": "Écoles",
+    "teachers": "Professeurs",
+    "messages": "Messages",
+    "profile": "Profil",
+    "login": "Connexion",
+    "signup": "Inscription"
+  },
+  "schools": {
+    "title": "Trouver des Écoles",
+    "filterByDistance": "Filtrer par distance",
+    "filterByPrice": "Filtrer par prix",
+    "filterBySeries": "Filtrer par série",
+    "nearYou": "Écoles près de vous",
+    "noResults": "Aucune école trouvée",
+    "rating": "Note",
+    "reviews": "avis",
+    "distance": "km de distance"
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Une erreur s'est produite",
+    "success": "Succès",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "back": "Retour"
+  }
+}

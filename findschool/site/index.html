@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GoSchool - Trouve ton école et ta formation</title>
+    <meta
+      name="description"
+      content="GoSchool aide les élèves à comparer les écoles, formations et métiers au Congo, au Cameroun et au Sénégal."
+    />
+    <style>
+      :root {
+        --blue: #2563eb;
+        --blue-dark: #1d4ed8;
+        --green: #059669;
+        --yellow: #f59e0b;
+        --ink: #111827;
+        --muted: #64748b;
+        --line: #e2e8f0;
+        --soft: #f8fafc;
+        --panel: #ffffff;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: #fff;
+        color: var(--ink);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .wrap {
+        width: min(1160px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      .topbar {
+        border-bottom: 1px solid var(--line);
+        background: #fff;
+      }
+
+      .nav {
+        display: flex;
+        min-height: 68px;
+        align-items: center;
+        justify-content: space-between;
+        gap: 22px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 22px;
+        font-weight: 900;
+      }
+
+      .brand-mark {
+        display: grid;
+        width: 38px;
+        height: 38px;
+        place-items: center;
+        border-radius: 8px;
+        background: var(--blue);
+        color: #fff;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: #334155;
+        font-weight: 800;
+      }
+
+      .nav-links a {
+        border-radius: 8px;
+        padding: 10px 12px;
+      }
+
+      .nav-links a:hover {
+        background: var(--soft);
+      }
+
+      .account {
+        display: inline-flex;
+        min-height: 42px;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 0 14px;
+        font-weight: 800;
+      }
+
+      .hero {
+        position: relative;
+        overflow: hidden;
+        background: #eff6ff;
+      }
+
+      .hero::after {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        content: "";
+        background:
+          linear-gradient(90deg, rgba(239, 246, 255, 0.98), rgba(239, 246, 255, 0.88), rgba(239, 246, 255, 0.2)),
+          url("../frontend/public/goschool-hero.png") center right / cover no-repeat;
+      }
+
+      .hero-inner {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        min-height: 560px;
+        align-content: center;
+        padding: 72px 0 84px;
+      }
+
+      .hero-copy {
+        max-width: 760px;
+      }
+
+      .eyebrow {
+        margin: 0 0 10px;
+        color: var(--blue);
+        font-weight: 900;
+      }
+
+      h1 {
+        margin: 0;
+        max-width: 760px;
+        font-size: clamp(40px, 6vw, 68px);
+        line-height: 1.02;
+        letter-spacing: 0;
+      }
+
+      .lead {
+        max-width: 650px;
+        color: #475569;
+        font-size: 20px;
+        line-height: 1.7;
+      }
+
+      .finder {
+        max-width: 860px;
+        margin-top: 34px;
+        border: 1px solid #dbeafe;
+        border-radius: 10px;
+        background: #fff;
+        padding: 10px;
+        box-shadow: 0 24px 70px rgba(37, 99, 235, 0.16);
+      }
+
+      .finder-grid {
+        display: grid;
+        grid-template-columns: 1fr 0.85fr auto;
+        gap: 8px;
+      }
+
+      .field {
+        display: grid;
+        gap: 5px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 10px 12px;
+      }
+
+      .field span {
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .field input,
+      .field select {
+        min-width: 0;
+        border: 0;
+        color: var(--ink);
+        font: inherit;
+        font-weight: 700;
+        outline: 0;
+      }
+
+      .button {
+        display: inline-flex;
+        min-height: 54px;
+        align-items: center;
+        justify-content: center;
+        border: 0;
+        border-radius: 8px;
+        background: var(--green);
+        color: #fff;
+        cursor: pointer;
+        padding: 0 20px;
+        font: inherit;
+        font-weight: 900;
+      }
+
+      .button:hover {
+        background: #047857;
+      }
+
+      .proof {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+        margin-top: 24px;
+        color: #334155;
+        font-weight: 800;
+      }
+
+      .proof strong {
+        color: var(--ink);
+      }
+
+      section {
+        padding: 64px 0;
+      }
+
+      .soft {
+        background: var(--soft);
+      }
+
+      .section-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 24px;
+        margin-bottom: 28px;
+      }
+
+      h2 {
+        margin: 0;
+        font-size: clamp(28px, 4vw, 42px);
+        line-height: 1.12;
+        letter-spacing: 0;
+      }
+
+      h3 {
+        margin: 0;
+        font-size: 20px;
+      }
+
+      p {
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .chip {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: #fff;
+        padding: 10px 14px;
+        color: #334155;
+        font-weight: 800;
+      }
+
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+
+      .school-card,
+      .content-card {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        padding: 22px;
+      }
+
+      .school-top {
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        gap: 14px;
+      }
+
+      .badge {
+        display: inline-flex;
+        border-radius: 999px;
+        background: #fef3c7;
+        color: #92400e;
+        padding: 6px 10px;
+        font-size: 14px;
+        font-weight: 900;
+      }
+
+      .meta {
+        color: var(--muted);
+        font-size: 14px;
+        font-weight: 800;
+      }
+
+      .link {
+        display: inline-flex;
+        margin-top: 14px;
+        color: var(--blue);
+        font-weight: 900;
+      }
+
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        counter-reset: step;
+      }
+
+      .step {
+        border-left: 3px solid var(--blue);
+        background: #fff;
+        padding: 18px;
+      }
+
+      .step::before {
+        counter-increment: step;
+        content: counter(step);
+        display: grid;
+        width: 30px;
+        height: 30px;
+        margin-bottom: 12px;
+        place-items: center;
+        border-radius: 999px;
+        background: var(--blue);
+        color: #fff;
+        font-weight: 900;
+      }
+
+      .notice {
+        border: 1px solid #bfdbfe;
+        border-radius: 8px;
+        background: #eff6ff;
+        padding: 20px;
+      }
+
+      .notice p {
+        margin: 0;
+        color: #1e3a8a;
+      }
+
+      .quote {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+        padding: 22px;
+      }
+
+      .quote p {
+        color: #334155;
+      }
+
+      .stars {
+        color: var(--yellow);
+        font-weight: 900;
+      }
+
+      .footer {
+        border-top: 1px solid var(--line);
+        background: #0f172a;
+        color: #fff;
+        padding: 36px 0;
+      }
+
+      .footer p {
+        color: #cbd5e1;
+      }
+
+      @media (max-width: 860px) {
+        .nav-links,
+        .account {
+          display: none;
+        }
+
+        .hero::after {
+          background:
+            linear-gradient(90deg, rgba(239, 246, 255, 0.98), rgba(239, 246, 255, 0.9)),
+            url("../frontend/public/goschool-hero.png") center / cover no-repeat;
+        }
+
+        .finder-grid,
+        .grid-3,
+        .steps {
+          grid-template-columns: 1fr;
+        }
+
+        .section-head {
+          align-items: start;
+          flex-direction: column;
+        }
+
+        .button {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="wrap nav">
+        <a class="brand" href="#">
+          <span class="brand-mark">G</span>
+          <span>GoSchool</span>
+        </a>
+        <nav class="nav-links" aria-label="Navigation principale">
+          <a href="#formations">Formations</a>
+          <a href="#metiers">Métiers</a>
+          <a href="#ecoles">Établissements</a>
+          <a href="#conseils">Conseils</a>
+        </nav>
+        <a class="account" href="#contact">Mon compte</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="wrap hero-inner">
+          <div class="hero-copy">
+            <p class="eyebrow">Orientation scolaire et professionnelle</p>
+            <h1>Toutes les écoles pour trouver la bonne.</h1>
+            <p class="lead">
+              GoSchool compare les écoles, formations et débouchés pour aider chaque élève à choisir un parcours clair,
+              utile et adapté à son projet.
+            </p>
+
+            <form class="finder" action="#ecoles">
+              <div class="finder-grid">
+                <label class="field">
+                  <span>Je cherche</span>
+                  <input name="formation" type="search" placeholder="BTS, licence, informatique, santé..." />
+                </label>
+                <label class="field">
+                  <span>Où ?</span>
+                  <select name="ville">
+                    <option value="">Toutes les villes</option>
+                    <option>Brazzaville</option>
+                    <option>Pointe-Noire</option>
+                    <option>Douala</option>
+                    <option>Yaoundé</option>
+                    <option>Dakar</option>
+                  </select>
+                </label>
+                <button class="button" type="submit">Trouver ma future école</button>
+              </div>
+            </form>
+
+            <div class="proof" aria-label="Indicateurs GoSchool">
+              <span><strong>120+</strong> écoles référencées</span>
+              <span><strong>4.8/5</strong> satisfaction élèves</span>
+              <span><strong>Gratuit</strong> pour les familles</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="soft" id="formations">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Explorer par catégorie</p>
+              <h2>Formations les plus recherchées</h2>
+            </div>
+            <a class="link" href="#ecoles">Voir les résultats</a>
+          </div>
+          <div class="chips">
+            <a class="chip" href="#ecoles">Bac général</a>
+            <a class="chip" href="#ecoles">Bac technique</a>
+            <a class="chip" href="#ecoles">BTS</a>
+            <a class="chip" href="#ecoles">Licence</a>
+            <a class="chip" href="#ecoles">Informatique</a>
+            <a class="chip" href="#ecoles">Commerce</a>
+            <a class="chip" href="#ecoles">Comptabilité</a>
+            <a class="chip" href="#ecoles">Santé</a>
+            <a class="chip" href="#ecoles">Langues</a>
+            <a class="chip" href="#ecoles">Formation pro</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="ecoles">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Découvre les campus</p>
+              <h2>Établissements recommandés</h2>
+            </div>
+            <a class="link" href="#contact">Référencer son établissement</a>
+          </div>
+          <div class="grid-3">
+            <article class="school-card">
+              <div class="school-top">
+                <div>
+                  <p class="meta">Brazzaville · Lycée technique</p>
+                  <h3>Lycée Technique du Plateau</h3>
+                </div>
+                <span class="badge">4.7</span>
+              </div>
+              <p>Séries C, D, G2 et préparation aux examens avec encadrement renforcé.</p>
+              <a class="link" href="#contact">Voir l’établissement</a>
+            </article>
+            <article class="school-card">
+              <div class="school-top">
+                <div>
+                  <p class="meta">Douala · Institut privé</p>
+                  <h3>Institut Horizon Pro</h3>
+                </div>
+                <span class="badge">4.8</span>
+              </div>
+              <p>Formations en gestion, informatique, comptabilité et entrepreneuriat.</p>
+              <a class="link" href="#contact">Voir l’établissement</a>
+            </article>
+            <article class="school-card">
+              <div class="school-top">
+                <div>
+                  <p class="meta">Dakar · Centre de formation</p>
+                  <h3>Académie Teranga</h3>
+                </div>
+                <span class="badge">4.6</span>
+              </div>
+              <p>Cours de soutien, langues, orientation et accompagnement personnalisé.</p>
+              <a class="link" href="#contact">Voir l’établissement</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="soft" id="metiers">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Choisir avec méthode</p>
+              <h2>Comment GoSchool t’oriente</h2>
+            </div>
+          </div>
+          <div class="steps">
+            <article class="step">
+              <h3>Définis ton projet</h3>
+              <p>Niveau, ville, domaine, budget et objectif professionnel.</p>
+            </article>
+            <article class="step">
+              <h3>Compare les options</h3>
+              <p>Écoles, formations, avis, frais et conditions d’admission.</p>
+            </article>
+            <article class="step">
+              <h3>Demande des infos</h3>
+              <p>Contacte les établissements qui correspondent à ton profil.</p>
+            </article>
+            <article class="step">
+              <h3>Décide sereinement</h3>
+              <p>Avance avec une shortlist claire et des critères visibles.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="wrap notice">
+          <p>
+            <strong>Transparence.</strong> GoSchool classe les résultats selon la pertinence du projet, la localisation,
+            les informations disponibles, les avis et la qualité du profil établissement. Le service reste gratuit pour
+            les élèves et familles.
+          </p>
+        </div>
+      </section>
+
+      <section class="soft">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Avis des élèves</p>
+              <h2>Ils ont clarifié leur choix</h2>
+            </div>
+          </div>
+          <div class="grid-3">
+            <article class="quote">
+              <p>“J’ai pu comparer les écoles de Brazzaville et comprendre les séries qui correspondaient à mon niveau.”</p>
+              <strong>Prisca · Terminale</strong>
+              <div class="stars">★★★★★</div>
+            </article>
+            <article class="quote">
+              <p>“La recherche par ville et domaine m’a aidé à trouver une formation pro sérieuse sans perdre du temps.”</p>
+              <strong>Junior · Formation pro</strong>
+              <div class="stars">★★★★★</div>
+            </article>
+            <article class="quote">
+              <p>“Les critères sont simples: coût, avis, programme, contact. C’est exactement ce qu’il faut aux parents.”</p>
+              <strong>Nadia · Parent</strong>
+              <div class="stars">★★★★★</div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="conseils">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Conseils orientation</p>
+              <h2>Guides utiles pour avancer</h2>
+            </div>
+            <a class="link" href="#contact">Toutes les actualités</a>
+          </div>
+          <div class="grid-3">
+            <article class="content-card">
+              <p class="meta">Orientation</p>
+              <h3>Comment choisir une école après le bac ?</h3>
+              <a class="link" href="#contact">Lire le guide</a>
+            </article>
+            <article class="content-card">
+              <p class="meta">Métiers</p>
+              <h3>Quels débouchés après une formation en informatique ?</h3>
+              <a class="link" href="#contact">Lire le guide</a>
+            </article>
+            <article class="content-card">
+              <p class="meta">Admissions</p>
+              <h3>Préparer son dossier d’inscription sans stress</h3>
+              <a class="link" href="#contact">Lire le guide</a>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer" id="contact">
+      <div class="wrap">
+        <h2>GoSchool</h2>
+        <p>La plateforme d’orientation pour comparer les écoles, formations et métiers en Afrique francophone.</p>
+        <a class="button" href="mailto:contact@goschool.com">Contacter GoSchool</a>
+      </div>
+    </footer>
+  </body>
+</html>

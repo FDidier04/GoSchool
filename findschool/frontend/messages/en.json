@@ -1,0 +1,38 @@
+{
+  "index": {
+    "title": "Find Your Perfect School",
+    "subtitle": "Discover and compare educational institutions across Congo, Cameroon and Senegal",
+    "searchPlaceholder": "Search schools, courses or professionals",
+    "getStarted": "Get Started"
+  },
+  "navigation": {
+    "home": "Home",
+    "schools": "Schools",
+    "teachers": "Teachers",
+    "messages": "Messages",
+    "profile": "Profile",
+    "login": "Login",
+    "signup": "Sign Up"
+  },
+  "schools": {
+    "title": "Find Schools",
+    "filterByDistance": "Filter by distance",
+    "filterByPrice": "Filter by price",
+    "filterBySeries": "Filter by series",
+    "nearYou": "Schools near you",
+    "noResults": "No schools found",
+    "rating": "Rating",
+    "reviews": "reviews",
+    "distance": "km away"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "back": "Back"
+  }
+}
