@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { BookOpen, GraduationCap, LogIn, Menu, Search, UserPlus, X } from 'lucide-react';
+import { BookOpen, GraduationCap, Menu, Search, UserCircle, X } from 'lucide-react';
 import { useState } from 'react';
 
 const links = [
@@ -46,19 +46,11 @@ export function Navigation() {
         <div className="hidden items-center gap-2 md:flex">
           <Link
             href="/auth/login"
-            className="inline-flex h-10 items-center justify-center gap-2 rounded-md px-3 text-sm font-semibold text-slate-700 hover:bg-slate-50"
-            title="Connexion"
+            className="inline-flex h-10 items-center justify-center gap-2 rounded-md border border-slate-300 px-4 text-sm font-semibold text-slate-700 hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"
+            title="Mon compte"
           >
-            <LogIn className="h-4 w-4" />
-            Connexion
-          </Link>
-          <Link
-            href="/auth/signup"
-            className="inline-flex h-10 items-center justify-center gap-2 rounded-md bg-blue-700 px-4 text-sm font-semibold text-white hover:bg-blue-800"
-            title="Creer un compte"
-          >
-            <UserPlus className="h-4 w-4" />
-            Inscription
+            <UserCircle className="h-4 w-4" />
+            Mon compte
           </Link>
         </div>
 
@@ -94,6 +86,14 @@ export function Navigation() {
             >
               <Search className="h-4 w-4" />
               Rechercher
+            </Link>
+            <Link
+              href="/auth/login"
+              onClick={() => setIsOpen(false)}
+              className="inline-flex items-center gap-2 rounded-md border border-slate-300 px-3 py-3 font-semibold text-slate-800"
+            >
+              <UserCircle className="h-4 w-4" />
+              Mon compte
             </Link>
             <Link
               href="/courses"

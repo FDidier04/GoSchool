@@ -33,12 +33,12 @@ export default function SignupPage() {
 
     // Validation
     if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
+      setError('Les mots de passe ne correspondent pas');
       return;
     }
 
     if (formData.password.length < 8) {
-      setError('Password must be at least 8 characters');
+      setError('Le mot de passe doit contenir au moins 8 caracteres');
       return;
     }
 
@@ -78,8 +78,8 @@ export default function SignupPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary to-secondary flex items-center justify-center px-4 py-8">
       <div className="bg-white rounded-lg shadow-2xl p-8 max-w-md w-full">
-        <h1 className="text-3xl font-bold text-center text-gray-900 mb-2">Create Account</h1>
-        <p className="text-center text-gray-600 mb-8">Join GoSchool today</p>
+        <h1 className="text-3xl font-bold text-center text-gray-900 mb-2">Creer un compte</h1>
+        <p className="text-center text-gray-600 mb-8">Rejoins GoSchool gratuitement</p>
 
         {error && (
           <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
@@ -91,7 +91,7 @@ export default function SignupPage() {
           {/* Full Name */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Full Name
+              Nom complet
             </label>
             <input
               type="text"
@@ -107,7 +107,7 @@ export default function SignupPage() {
           {/* Email */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Email Address
+              Adresse email
             </label>
             <input
               type="email"
@@ -123,7 +123,7 @@ export default function SignupPage() {
           {/* Role */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              I am a...
+              Je suis...
             </label>
             <select
               name="role"
@@ -131,17 +131,17 @@ export default function SignupPage() {
               onChange={handleChange}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
             >
-              <option value="student">Student</option>
-              <option value="teacher">Teacher</option>
-              <option value="professional">Professional</option>
-              <option value="school_admin">School Admin</option>
+              <option value="student">Eleve / Etudiant</option>
+              <option value="teacher">Professeur</option>
+              <option value="professional">Professionnel</option>
+              <option value="school_admin">Etablissement</option>
             </select>
           </div>
 
           {/* Password */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Password
+              Mot de passe
             </label>
             <input
               type="password"
@@ -158,7 +158,7 @@ export default function SignupPage() {
           {/* Confirm Password */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Confirm Password
+              Confirmer le mot de passe
             </label>
             <input
               type="password"
@@ -177,15 +177,15 @@ export default function SignupPage() {
             disabled={loading}
             className="w-full bg-primary text-white py-2 rounded-lg font-semibold hover:bg-secondary transition disabled:opacity-50"
           >
-            {loading ? 'Creating account...' : 'Create Account'}
+            {loading ? 'Creation du compte...' : 'Creer mon compte'}
           </button>
         </form>
 
         {/* Login Link */}
         <p className="text-center text-gray-600 mt-8">
-          Already have an account?{' '}
+          Tu as deja un compte ?{' '}
           <Link href="/auth/login" className="text-primary font-semibold hover:underline">
-            Sign In
+            Se connecter
           </Link>
         </p>
       </div>

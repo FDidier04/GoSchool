@@ -101,6 +101,12 @@
         font-weight: 800;
       }
 
+      .account:hover {
+        border-color: #bfdbfe;
+        background: #eff6ff;
+        color: var(--blue);
+      }
+
       .hero {
         position: relative;
         overflow: hidden;
@@ -371,6 +377,67 @@
         font-weight: 900;
       }
 
+      .auth-panel {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        align-items: stretch;
+      }
+
+      .auth-card {
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: #fff;
+        padding: 28px;
+      }
+
+      .auth-card.featured {
+        border-color: #bfdbfe;
+        background: #eff6ff;
+      }
+
+      .auth-form {
+        display: grid;
+        gap: 14px;
+        margin-top: 22px;
+      }
+
+      .auth-form label {
+        display: grid;
+        gap: 7px;
+        color: #334155;
+        font-weight: 800;
+      }
+
+      .auth-form input,
+      .auth-form select {
+        min-height: 46px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 0 12px;
+        font: inherit;
+        outline: 0;
+      }
+
+      .auth-form input:focus,
+      .auth-form select:focus {
+        border-color: #93c5fd;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.14);
+      }
+
+      .secondary-button {
+        display: inline-flex;
+        min-height: 54px;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--blue);
+        border-radius: 8px;
+        background: #fff;
+        color: var(--blue);
+        padding: 0 20px;
+        font-weight: 900;
+      }
+
       .footer {
         border-top: 1px solid var(--line);
         background: #0f172a;
@@ -396,7 +463,8 @@
 
         .finder-grid,
         .grid-3,
-        .steps {
+        .steps,
+        .auth-panel {
           grid-template-columns: 1fr;
         }
 
@@ -424,7 +492,7 @@
           <a href="#ecoles">Établissements</a>
           <a href="#conseils">Conseils</a>
         </nav>
-        <a class="account" href="#contact">Mon compte</a>
+        <a class="account" href="#mon-compte">Mon compte</a>
       </div>
     </header>
 
@@ -631,6 +699,65 @@
               <p class="meta">Admissions</p>
               <h3>Préparer son dossier d’inscription sans stress</h3>
               <a class="link" href="#contact">Lire le guide</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="soft" id="mon-compte">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Espace personnel</p>
+              <h2>Mon compte GoSchool</h2>
+            </div>
+          </div>
+          <div class="auth-panel">
+            <article class="auth-card featured">
+              <p class="eyebrow">J'ai deja un compte</p>
+              <h3>Connexion</h3>
+              <p>Connecte-toi pour retrouver tes recherches, tes demandes d'information et tes etablissements favoris.</p>
+              <form class="auth-form" action="#mon-compte">
+                <label>
+                  Adresse email
+                  <input type="email" name="email" placeholder="ton.email@example.com" required />
+                </label>
+                <label>
+                  Mot de passe
+                  <input type="password" name="password" placeholder="Mot de passe" required />
+                </label>
+                <button class="button" type="submit">Se connecter</button>
+              </form>
+            </article>
+
+            <article class="auth-card">
+              <p class="eyebrow">Je suis nouveau</p>
+              <h3>Creer un compte</h3>
+              <p>Crée gratuitement ton espace pour comparer les ecoles et recevoir les informations utiles.</p>
+              <form class="auth-form" action="#mon-compte">
+                <label>
+                  Nom complet
+                  <input type="text" name="fullName" placeholder="Ton nom complet" required />
+                </label>
+                <label>
+                  Adresse email
+                  <input type="email" name="newEmail" placeholder="ton.email@example.com" required />
+                </label>
+                <label>
+                  Profil
+                  <select name="role" required>
+                    <option>Eleve / Etudiant</option>
+                    <option>Parent</option>
+                    <option>Etablissement</option>
+                    <option>Professeur</option>
+                  </select>
+                </label>
+                <label>
+                  Mot de passe
+                  <input type="password" name="newPassword" placeholder="8 caracteres minimum" required />
+                </label>
+                <button class="secondary-button" type="submit">Creer mon compte</button>
+              </form>
             </article>
           </div>
         </div>

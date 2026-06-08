@@ -60,8 +60,8 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary to-secondary flex items-center justify-center px-4">
       <div className="bg-white rounded-lg shadow-2xl p-8 max-w-md w-full">
-        <h1 className="text-3xl font-bold text-center text-gray-900 mb-2">Welcome Back</h1>
-        <p className="text-center text-gray-600 mb-8">Sign in to your account</p>
+        <h1 className="text-3xl font-bold text-center text-gray-900 mb-2">Mon compte GoSchool</h1>
+        <p className="text-center text-gray-600 mb-8">Connecte-toi si tu as deja un compte</p>
 
         {error && (
           <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
@@ -73,7 +73,7 @@ export default function LoginPage() {
           {/* Email */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Email Address
+              Adresse email
             </label>
             <input
               type="email"
@@ -89,7 +89,7 @@ export default function LoginPage() {
           {/* Password */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Password
+              Mot de passe
             </label>
             <input
               type="password"
@@ -108,7 +108,7 @@ export default function LoginPage() {
             disabled={loading}
             className="w-full bg-primary text-white py-2 rounded-lg font-semibold hover:bg-secondary transition disabled:opacity-50"
           >
-            {loading ? 'Signing in...' : 'Sign In'}
+            {loading ? 'Connexion...' : 'Se connecter'}
           </button>
         </form>
 
@@ -128,9 +128,9 @@ export default function LoginPage() {
 
         {/* Sign Up Link */}
         <p className="text-center text-gray-600 mt-8">
-          Don't have an account?{' '}
-          <Link href="/signup" className="text-primary font-semibold hover:underline">
-            Sign Up
+          Pas encore de compte ?{' '}
+          <Link href="/auth/signup" className="text-primary font-semibold hover:underline">
+            Creer un compte
           </Link>
         </p>
       </div>
