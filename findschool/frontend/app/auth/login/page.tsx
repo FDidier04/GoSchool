@@ -3,44 +3,43 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { ArrowRight, X } from 'lucide-react';
 import { apiClient } from '@/lib/api';
 import { useAppStore } from '@/lib/store';
 
 export default function LoginPage() {
   const router = useRouter();
   const setUser = useAppStore((state) => state.setUser);
-  
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [formData, setFormData] = useState({
-    email: '',
+    phone: '',
     password: '',
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [event.target.name]: event.target.value,
     });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
     setError('');
     setLoading(true);
 
     try {
-      const response = await apiClient.login(formData.email, formData.password);
+      const response = await apiClient.login(formData.phone, formData.password);
 
       if (response.success) {
-        // Store token
         localStorage.setItem('auth_token', response.data!.token);
-        
-        // Mock user data (should come from API)
+
         setUser({
           id: '1',
-          email: formData.email,
-          fullName: 'User',
+          email: formData.phone,
+          fullName: 'Utilisateur GoSchool',
           role: 'student',
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -48,48 +47,63 @@ export default function LoginPage() {
 
         router.push('/dashboard');
       } else {
-        setError(response.error || 'Login failed');
+        setError(response.error || 'Connexion impossible');
       }
-    } catch (error: any) {
-      setError(error.message || 'An error occurred');
+    } catch (requestError: any) {
+      setError(requestError.message || 'Une erreur est survenue');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary to-secondary flex items-center justify-center px-4">
-      <div className="bg-white rounded-lg shadow-2xl p-8 max-w-md w-full">
-        <h1 className="text-3xl font-bold text-center text-gray-900 mb-2">Mon compte GoSchool</h1>
-        <p className="text-center text-gray-600 mb-8">Connecte-toi si tu as deja un compte</p>
+    <main className="min-h-screen bg-slate-200/70 px-4 py-6">
+      <section className="relative mx-auto min-h-[calc(100vh-3rem)] max-w-3xl overflow-y-auto rounded-b-2xl bg-white px-6 py-12 shadow-2xl sm:px-12 lg:px-14">
+        <Link
+          href="/"
+          className="absolute right-5 top-5 inline-flex h-10 w-10 items-center justify-center rounded-full text-slate-600 hover:bg-slate-100"
+          aria-label="Fermer"
+        >
+          <X className="h-6 w-6" />
+        </Link>
+
+        <h1 className="max-w-2xl text-4xl font-black leading-tight tracking-normal text-black sm:text-5xl">
+          Connecte-toi et retrouve ta recherche !
+        </h1>
+        <p className="mt-10 text-right text-lg text-slate-500">
+          Les champs marques d&apos;un <span className="text-red-500">*</span> sont obligatoires
+        </p>
 
         {error && (
-          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
+          <div className="mt-5 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-red-700">
             {error}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Email */}
+        <form onSubmit={handleSubmit} className="mt-6 space-y-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Adresse email
+            <label className="mb-3 block text-xl font-black text-black">
+              Numero de telephone <span className="text-red-500">*</span>
             </label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-              placeholder="your@email.com"
-            />
+            <div className="grid grid-cols-[86px_1fr]">
+              <div className="flex min-h-16 items-center justify-center rounded-l-3xl border border-r-0 border-violet-200 bg-violet-50 font-black text-slate-700">
+                CG
+              </div>
+              <input
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                required
+                className="min-h-16 min-w-0 rounded-r-3xl border border-violet-200 px-6 text-xl outline-none focus:border-violet-400 focus:ring-4 focus:ring-violet-100"
+                placeholder="06..."
+              />
+            </div>
           </div>
 
-          {/* Password */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Mot de passe
+            <label className="mb-3 block text-xl font-black text-black">
+              Mot de passe <span className="text-red-500">*</span>
             </label>
             <input
               type="password"
@@ -97,43 +111,28 @@ export default function LoginPage() {
               value={formData.password}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-              placeholder="••••••••"
+              className="min-h-16 w-full rounded-3xl border border-violet-200 px-6 text-xl outline-none focus:border-violet-400 focus:ring-4 focus:ring-violet-100"
+              placeholder="Ton mot de passe"
             />
           </div>
 
-          {/* Submit */}
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-primary text-white py-2 rounded-lg font-semibold hover:bg-secondary transition disabled:opacity-50"
+            className="inline-flex min-h-[72px] w-full items-center justify-center gap-3 rounded-full bg-violet-700 px-6 text-2xl font-black text-white transition hover:bg-violet-800 disabled:opacity-60"
           >
-            {loading ? 'Connexion...' : 'Se connecter'}
+            {loading ? 'Connexion...' : 'Confirmer'}
+            <ArrowRight className="h-7 w-7" />
           </button>
         </form>
 
-        {/* Divider */}
-        <div className="my-6 flex items-center">
-          <div className="flex-1 border-t border-gray-300"></div>
-          <span className="px-3 text-gray-500 text-sm">or</span>
-          <div className="flex-1 border-t border-gray-300"></div>
-        </div>
-
-        {/* Social Login (placeholders) */}
-        <div className="space-y-3">
-          <button className="w-full bg-gray-100 text-gray-900 py-2 rounded-lg font-medium hover:bg-gray-200 transition">
-            Continue with Google
-          </button>
-        </div>
-
-        {/* Sign Up Link */}
-        <p className="text-center text-gray-600 mt-8">
+        <p className="mt-7 text-center text-xl font-bold text-slate-500">
           Pas encore de compte ?{' '}
-          <Link href="/auth/signup" className="text-primary font-semibold hover:underline">
+          <Link href="/auth/signup" className="border-b-2 border-violet-700 text-violet-700">
             Creer un compte
           </Link>
         </p>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }
